@@ -32,6 +32,14 @@
            type="button"
            value="Size by weight"
            onclick="sizeByWeight()"/>
+    <input name="SizeByAttack"
+           type="button"
+           value="Size by attack (minions)"
+           onclick="sizeByAttack()"/>
+    <input name="SizeByAttack"
+           type="button"
+           value="Size by health (minions)"
+           onclick="sizeByHealth()"/>
     <input name="SizeByDefault"
            type="button"
            value="Size by default"
@@ -201,7 +209,7 @@
                 .attr({
                     "r": function (d) {
                         var card = getCard(graph.nodes, d.cardId);
-                        return card.cost * 3;
+                        return card.cost * 3 + 1;
                     }
                 });
     }
@@ -213,6 +221,36 @@
                 .attr({
                     "r": function (d) {
                         return d.weight / 3;
+                    }
+                });
+    }
+
+    function sizeByAttack() {
+        d3.selectAll("circle")
+                .transition()
+                .duration(750)
+                .attr({
+                    "r": function (d) {
+                        var card = getCard(graph.nodes, d.cardId);
+                        if (card.attack)
+                            return card.attack * 3;
+                        else
+                            return 1;
+                    }
+                });
+    }
+
+    function sizeByHealth() {
+        d3.selectAll("circle")
+                .transition()
+                .duration(750)
+                .attr({
+                    "r": function (d) {
+                        var card = getCard(graph.nodes, d.cardId);
+                        if (card.health)
+                            return card.health * 3;
+                        else
+                            return 1;
                     }
                 });
     }
