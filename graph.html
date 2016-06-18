@@ -37,6 +37,7 @@
            value="Size by default"
            onclick="sizeByDefault()"/>
 </div>
+
 <script>
     var graph = getBipartiteGraph();
 
@@ -200,6 +201,8 @@
 
     function sizeByCost() {
         d3.selectAll("circle")
+                .transition()
+                .duration(750)
                 .attr({
                     "r": function (d) {
                         var card = getCard(graph.nodes, d.cardId);
@@ -210,6 +213,8 @@
 
     function sizeByWeight() {
         d3.selectAll("circle")
+                .transition()
+                .duration(750)
                 .attr({
                     "r": function (d) {
                         return d.weight / 3;
@@ -219,6 +224,8 @@
 
     function sizeByDefault() {
         d3.selectAll("circle")
+                .transition()
+                .duration(750)
                 .attr({
                     "r": 8
                 });
