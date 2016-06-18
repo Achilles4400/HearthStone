@@ -21,121 +21,180 @@
     <script src="js/graph.js"></script>
 </head>
 <body>
-    <script src="d3/d3.js"></script>
-    <script>
-        var graph = getBipartiteGraph();
+<script src="d3/d3.js"></script>
+<script>
+    var graph = getBipartiteGraph();
 
-        var width = 700, height = 700;
+    var width = 700, height = 700;
 
-        var classColor = {"Warrior": "#C79C6E",
-            "Shaman": "#0070DE",
-            "Rogue": "#FFF569",
-            "Paladin": "#F58CBA",
-            "Hunter": "#ABD473",
-            "Druid": "#FF7D0A",
-            "Warlock": "#9482C9",
-            "Mage": "#69CCF0",
-            "Priest": "#FFFFFF",
-            "default": "#DFDFDF"
-        };
+    var classColor = {
+        "Warrior": "#C79C6E",
+        "Shaman": "#0070DE",
+        "Rogue": "#FFF569",
+        "Paladin": "#F58CBA",
+        "Hunter": "#ABD473",
+        "Druid": "#FF7D0A",
+        "Warlock": "#9482C9",
+        "Mage": "#69CCF0",
+        "Priest": "#FFFFFF",
+        "default": "#DFDFDF"
+    };
 
-        var links = graph.links;
+    var links = graph.links;
 
-        var nodes = {};
+    var nodes = {};
 
-        // Compute the distinct nodes from the links.
-        links.forEach(function(link) {
-            link.source = nodes[link.source] || (nodes[link.source] = {cardId: link.source});
-            link.target = nodes[link.target] || (nodes[link.target] = {cardId: link.target});
-        });
+    // Compute the distinct nodes from the links.
+    links.forEach(function (link) {
+        link.source = nodes[link.source] || (nodes[link.source] = {cardId: link.source});
+        link.target = nodes[link.target] || (nodes[link.target] = {cardId: link.target});
+    });
 
-        var force = d3.layout.force()
-                .nodes(d3.values(nodes))
-                .links(links)
-                .size([width, height])
-                .linkDistance(100)
-                .charge(-300)
-                .on("tick", tick)
-                .start();
+    var force = d3.layout.force()
+            .nodes(d3.values(nodes))
+            .links(links)
+            .size([width, height])
+            .linkDistance(100)
+            .charge(-300)
+            .on("tick", tick)
+            .start();
 
-        var svgImage = d3.select("body").append("svg")
-                .attr("width", 307)
-                .attr("height", 465);
+    var svgImage = d3.select("body").append("svg")
+            .attr({
+                "width": 307,
+                "height": 465
+            });
 
-        var svg = d3.select("body").append("svg")
-                .attr("width", width)
-                .attr("height", height);
+    var svg = d3.select("body").append("svg")
+            .attr({
+                "width": width,
+                "height": height
+            });
 
-        svgImage.append("svg:image")
-                .attr("xlink:href", "http://wow.zamimg.com/images/hearthstone/cards/enus/original/OG_280.png")
-                .attr("width", 307)
-                .attr("height", 465)
-                .attr("x", 0)
-                .attr("y", 0);
+    svgImage.append("svg:image")
+            .attr({
+                "xlink:href": "http://wow.zamimg.com/images/hearthstone/cards/enus/original/OG_280.png",
+                "width": 307,
+                "height": 465,
+                "x": 0,
+                "y": 0
+            });
 
-        var link = svg.selectAll(".link")
-                .data(force.links())
-                .enter().append("line")
-                .attr("class", "link");
+    var link = svg.selectAll(".link")
+            .data(force.links())
+            .enter().append("line")
+            .attr("class", "link");
 
-        var node = svg.selectAll(".node")
-                .data(force.nodes())
-                .enter().append("g")
-                .attr("class", "node")
-                .style("fill", function(d) {
-                    var card = getCard(graph.nodes, d.cardId);
-                    if(card != null)
-                        if(card.playerClass)
-                            return classColor[card.playerClass];
-                        else
-                            return classColor.default;
+    var node = svg.selectAll(".node")
+            .data(force.nodes())
+            .enter().append("g")
+            .style("fill", function (d) {
+                var card = getCard(graph.nodes, d.cardId);
+                if (card != null)
+                    if (card.playerClass)
+                        return classColor[card.playerClass];
                     else
-                        console.log(d.cardId);
+                        return classColor.default;
+                else
+                    console.log(d.cardId);
+            })
+            //.on("mouseover", mouseover)
+            .on("mouseover", function (d) {
+                var card = getCard(graph.nodes, d.cardId);
+                d3.select("svg > image").remove();
+                svgImage.append("svg:image")
+                        .attr({
+                            "xlink:href": card.img,
+                            "width": 307,
+                            "height": 465,
+                            "x": 0,
+                            "y": 0
+                        });
+                var circle = d3.select(this)
+                        .select('circle');
+                circle.style({
+                    "stroke": "white",
+                    "stroke-width": "3px"
+                });
+                d3.selectAll("line")
+                        .attr({
+                            "stroke-width": function (d) {
+                                if (d.source["cardId"] == card.cardId || d.target["cardId"] == card.cardId) {
+                                    return 5;
+                                }
+                            },
+                            "stroke": function (d) {
+                                if (d.source["cardId"] == card.cardId || d.target["cardId"] == card.cardId) {
+                                    return "black";
+                                }
+                            }
+                        });
+            })
+            .on("mouseout", function (d) {
+                d3.select(this)
+                        .select('circle')
+                        .style({
+                            "stroke": "black",
+                            "stroke-width": "3px"
+                        });
+                d3.selectAll("line")
+                        .attr({
+                            "stroke": "gray",
+                            "stroke-width": 1
+                        })
+            })
+            .call(force.drag);
+
+    node.append("circle")
+            .attr({
+                "r": function (d) {
+                    return d.weight / 3;
+                }
+            })
+            .style({
+                "stroke": "black",
+                "stroke-width": "3px"
+            });
+
+    /*node.append("text")
+     .attr("x", 12)
+     .attr("dy", ".35em")
+     .text(function(d) { return d.cardId; });*/
+
+    function tick() {
+        link
+                .attr("x1", function (d) {
+                    return d.source.x;
                 })
-                .on("mouseover", mouseover)
-                .on("mouseover", function(d) {
-                    var card = getCard(graph.nodes, d.cardId);
-                    d3.select("svg > image").remove();
-                    svgImage.append("svg:image")
-                            .attr("xlink:href", card.img)
-                            .attr("width", 307)
-                            .attr("height", 465)
-                            .attr("x", 0)
-                            .attr("y", 0);
+                .attr("y1", function (d) {
+                    return d.source.y;
                 })
-                .on("mouseout", mouseout)
-                .call(force.drag);
+                .attr("x2", function (d) {
+                    return d.target.x;
+                })
+                .attr("y2", function (d) {
+                    return d.target.y;
+                });
 
-        node.append("circle")
-                .attr("r", 8);
+        node
+                .attr("transform", function (d) {
+                    return "translate(" + d.x + "," + d.y + ")";
+                });
+    }
 
-        /*node.append("text")
-                .attr("x", 12)
-                .attr("dy", ".35em")
-                .text(function(d) { return d.cardId; });*/
+    /*
+     function mouseover() {
+     d3.select(this).select("circle").transition()
+     .duration(750)
+     .attr("r", 16);
+     }
 
-        function tick() {
-            link
-                    .attr("x1", function(d) { return d.source.x; })
-                    .attr("y1", function(d) { return d.source.y; })
-                    .attr("x2", function(d) { return d.target.x; })
-                    .attr("y2", function(d) { return d.target.y; });
-
-            node
-                    .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-        }
-
-        function mouseover() {
-            d3.select(this).select("circle").transition()
-                    .duration(750)
-                    .attr("r", 16);
-        }
-
-        function mouseout() {
-            d3.select(this).select("circle").transition()
-                    .duration(750)
-                    .attr("r", 8);
-        }
-    </script>
+     function mouseout() {
+     d3.select(this).select("circle").transition()
+     .duration(750)
+     .attr("r", 8);
+     }
+     */
+</script>
 </body>
 </html>

@@ -6,17 +6,17 @@ function getBipartiteGraph(){
     graph.nodes = [];
     for(cardSet in fileCards) {
         var cardSet = fileCards[cardSet];
-        for(card in cardSet) {
+        for(var card in cardSet) {
             graph.nodes.push(cardSet[card]);
         }
     }
 
     graph.links = [];
-    for(i in decks){
+    for(var i in decks){
         var deck = decks[i];
-        for(j = 0; j < deck.deckList.length; j++) {
+        for(var j = 0; j < deck.deckList.length; j++) {
             var cardIdSource = deck.deckList[j];
-            for(k = j+1; k < deck.deckList.length; k++){
+            for(var k = j+1; k < deck.deckList.length; k++){
                 var cardIdTarget = deck.deckList[k];
                 var link = {};
                 link.source = cardIdSource;
@@ -31,7 +31,7 @@ function getBipartiteGraph(){
 }
 
 function linkExist(links, link) {
-    for(i in links) {
+    for(var i in links) {
         if(links[i].source == link.source && links[i].target == link.target ||
             links[i].source == link.target && links[i].target == link.source){
             return true;
@@ -41,7 +41,7 @@ function linkExist(links, link) {
 }
 
 function getCard(cards, cardId) {
-    for(i in cards) {
+    for(var i in cards) {
         if (cards[i].cardId == cardId) {
             return cards[i];
         }
@@ -51,7 +51,7 @@ function getCard(cards, cardId) {
 
 function getCardIndex(cards, cardId) {
     var i = 0;
-    for(card in cards) {
+    for(var card in cards) {
         if (cards[card].cardId == card) {
             return i;
         }
