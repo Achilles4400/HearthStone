@@ -12,11 +12,10 @@
             stroke-width: 1.5px;
         }
 
-        .link {
-            stroke: #999;
-            stroke-opacity: .6;
+        .overlay {
+            fill: none;
+            pointer-events: all;
         }
-
     </style>
     <script src="js/graph.js"></script>
 </head>
@@ -85,7 +84,15 @@
             .attr({
                 "width": width,
                 "height": height
-            });
+            })
+            .append("g")
+            .call(d3.behavior.zoom().scaleExtent([-1, 10]).on("zoom", zoom))
+            .append("g");
+
+    svg.append("rect")
+            .attr("class", "overlay")
+            .attr("width", width)
+            .attr("height", height);
 
     svgImage.append("svg:image")
             .attr({
@@ -99,7 +106,10 @@
     var link = svg.selectAll(".link")
             .data(force.links())
             .enter().append("line")
-            .attr("class", "link");
+            .attr("class", "link")
+            .attr({
+                "stroke": "#999"
+            });
 
     var node = svg.selectAll(".node")
             .data(force.nodes())
@@ -120,7 +130,7 @@
                 d3.select("svg > image").remove();
                 svgImage.append("svg:image")
                         .attr({
-                            "xlink:href": card.img,
+                            "xlink:href": card.imgGold,
                             "width": 307,
                             "height": 465,
                             "x": 0,
@@ -136,13 +146,14 @@
                         .attr({
                             "stroke-width": function (d) {
                                 if (d.source["cardId"] == card.cardId || d.target["cardId"] == card.cardId) {
-                                    return 5;
+                                    return 2;
                                 }
                             },
                             "stroke": function (d) {
                                 if (d.source["cardId"] == card.cardId || d.target["cardId"] == card.cardId) {
                                     return "black";
                                 }
+                                return "#999";
                             }
                         });
             })
@@ -224,6 +235,10 @@
                 .attr({
                     "r": 8
                 });
+    }
+
+    function zoom() {
+        svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
     }
 </script>
 </body>
