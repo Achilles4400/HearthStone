@@ -22,6 +22,21 @@
 </head>
 <body>
 <script src="d3/d3.js"></script>
+
+<div id="option">
+    <input name="SizeByCost"
+           type="button"
+           value="Size by cost"
+           onclick="sizeByCost()"/>
+    <input name="SizeByWeight"
+           type="button"
+           value="Size by weight"
+           onclick="sizeByWeight()"/>
+    <input name="SizeByDefault"
+           type="button"
+           value="Size by default"
+           onclick="sizeByDefault()"/>
+</div>
 <script>
     var graph = getBipartiteGraph();
 
@@ -130,7 +145,7 @@
                             }
                         });
             })
-            .on("mouseout", function (d) {
+            .on("mouseout", function () {
                 d3.select(this)
                         .select('circle')
                         .style({
@@ -179,6 +194,33 @@
         node
                 .attr("transform", function (d) {
                     return "translate(" + d.x + "," + d.y + ")";
+                });
+    }
+
+
+    function sizeByCost() {
+        d3.selectAll("circle")
+                .attr({
+                    "r": function (d) {
+                        var card = getCard(graph.nodes, d.cardId);
+                        return card.cost * 3;
+                    }
+                });
+    }
+
+    function sizeByWeight() {
+        d3.selectAll("circle")
+                .attr({
+                    "r": function (d) {
+                        return d.weight / 3;
+                    }
+                });
+    }
+
+    function sizeByDefault() {
+        d3.selectAll("circle")
+                .attr({
+                    "r": 8
                 });
     }
 
