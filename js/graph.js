@@ -1,29 +1,63 @@
 function getBipartiteGraph(){
     var graph = {};
-    var cards = JSON.parse(readJSON("data/cards.json"));
+    var fileCards = JSON.parse(readJSON("data/cards.json"));
     var decks = JSON.parse(readJSON("data/decks.json"));
 
     graph.nodes = [];
-    for(cardSet in cards) {
-        var cardSet = cards[cardSet]
+    for(cardSet in fileCards) {
+        var cardSet = fileCards[cardSet];
         for(card in cardSet) {
             graph.nodes.push(cardSet[card]);
         }
     }
 
     graph.links = [];
-    for(deck in decks) {
-        graph.nodes.push(decks[decks]);
-        for(cardId in decks[deck].deckList) {
-            for(card in graph.nodes){
-                if(graph.nodes[card].cardId == cardId) {
-
-                }
+    for(i in decks){
+        var deck = decks[i];
+        for(j = 0; j < deck.deckList.length; j++) {
+            var cardIdSource = deck.deckList[j];
+            for(k = j+1; k < deck.deckList.length; k++){
+                var cardIdTarget = deck.deckList[k];
+                var link = {};
+                link.source = cardIdSource;
+                link.target = cardIdTarget;
+                if(!linkExist(graph.links, link))
+                    graph.links.push(link);
             }
         }
     }
 
     return graph;
+}
+
+function linkExist(links, link) {
+    for(i in links) {
+        if(links[i].source == link.source && links[i].target == link.target ||
+            links[i].source == link.target && links[i].target == link.source){
+            return true;
+        }
+    }
+    return false;
+}
+
+function getCard(cards, cardId) {
+    for(i in cards) {
+        if (cards[i].cardId == cardId) {
+            return cards[i];
+        }
+    }
+    return null;
+}
+
+function getCardIndex(cards, cardId) {
+    var i = 0;
+    for(card in cards) {
+        if (cards[card].cardId == card) {
+            return i;
+        }
+        i++;
+    }
+    return -1;
 }
 
 function readJSON(file) {
