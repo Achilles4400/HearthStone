@@ -30,6 +30,42 @@ function getBipartiteGraph(){
     return graph;
 }
 
+function getSubGraph(array){
+    var graph = {};
+    var fileCards = JSON.parse(readJSON("data/cards.json"));
+    var decks = JSON.parse(readJSON("data/decks.json"));
+
+    graph.nodes = [];
+    for(cardSet in fileCards) {
+        if (array.indexOf(cardSet.playerClass) > -1 || !cardSet.playerClass){
+            var cardSet = fileCards[cardSet];
+            for(var card in cardSet) {
+                graph.nodes.push(cardSet[card]);
+            }
+        }
+    }
+
+    graph.links = [];
+    for(var i in decks){
+        var deck = decks[i];
+        if (array.indexOf(deck.playerClass) > -1) {
+            for (var j = 0; j < deck.deckList.length; j++) {
+                var cardIdSource = deck.deckList[j];
+                for (var k = j + 1; k < deck.deckList.length; k++) {
+                    var cardIdTarget = deck.deckList[k];
+                    var link = {};
+                    link.source = cardIdSource;
+                    link.target = cardIdTarget;
+                    if (!linkExist(graph.links, link))
+                        graph.links.push(link);
+                }
+            }
+        }
+    }
+
+    return graph;
+}
+
 function linkExist(links, link) {
     for(var i in links) {
         if(links[i].source == link.source && links[i].target == link.target ||

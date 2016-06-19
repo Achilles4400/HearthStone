@@ -2,7 +2,7 @@
   {
     "author": "ThijsNL",
     "country": "Netherlands",
-    "classId": "HERO_05",
+    "playerClass": "Hunter",
     "deckList": [
       "OG_179",
       "EX1_611",
@@ -25,7 +25,7 @@
   {
     "author": "ThijsNL",
     "country": "Netherlands",
-    "classId": "HERO_03",
+    "playerClass": "Rogue",
     "deckList": [
       "CS2_072",
       "EX1_145",
@@ -50,7 +50,7 @@
   {
     "author": "ThijsNL",
     "country": "Netherlands",
-    "classId": "HERO_02",
+    "playerClass": "Shaman",
     "deckList": [
       "EX1_238",
       "CS2_045",
@@ -73,7 +73,7 @@
   {
     "author": "ThijsNL",
     "country": "Netherlands",
-    "classId": "HERO_07",
+    "playerClass": "Warlock",
     "deckList": [
       "EX1_302",
       "EX1_316",
@@ -110,7 +110,7 @@
   {
     "author": "ThijsNL",
     "country": "Netherlands",
-    "classId": "HERO_01",
+    "playerClass": "Warrior",
     "deckList": [
       "OG_314",
       "CS2_108",
@@ -136,7 +136,7 @@
   {
     "author": "Turna",
     "country": "Italy",
-    "classId": "HERO_05",
+    "playerClass": "Hunter",
     "deckList": [
       "DS1_184",
       "OG_179",
@@ -159,7 +159,7 @@
   {
     "author": "Turna",
     "country": "Italy",
-    "classId": "HERO_04",
+    "playerClass": "Paladin",
     "deckList": [
       "OG_198",
       "EX1_360",
@@ -184,7 +184,7 @@
   {
     "author": "Turna",
     "country": "Italy",
-    "classId": "HERO_02",
+    "playerClass": "Shaman",
     "deckList": [
       "EX1_238",
       "CS2_045",
@@ -207,7 +207,7 @@
   {
     "author": "Turna",
     "country": "Italy",
-    "classId": "HERO_01",
+    "playerClass": "Warrior",
     "deckList": [
       "OG_314",
       "CS2_108",
@@ -232,7 +232,7 @@
   {
     "author": "Turna",
     "country": "Italy",
-    "classId": "HERO_07",
+    "playerClass": "Warlock",
     "deckList": [
       "OG_114",
       "EX1_316",
@@ -255,7 +255,7 @@
   {
     "author": "Loyan",
     "country": "Poland",
-    "classId": "HERO_01",
+    "playerClass": "Warrior",
     "deckList": [
       "CS2_108",
       "EX1_410",
@@ -281,7 +281,7 @@
   {
     "author": "AKAWonder",
     "country": "Spain",
-    "classId": "HERO_06",
+    "playerClass": "Druid",
     "deckList": [
       "EX1_169",
       "AT_037",
@@ -308,7 +308,7 @@
   {
     "author": "AKAWonder",
     "country": "Spain",
-    "classId": "HERO_01",
+    "playerClass": "Warrior",
     "deckList": [
       "OG_314",
       "CS2_108",
@@ -336,7 +336,7 @@
   {
     "author": "AKAWonder",
     "country": "Spain",
-    "classId": "HERO_07",
+    "playerClass": "Warlock",
     "deckList": [
       "EX1_302",
       "EX1_066",
@@ -373,7 +373,7 @@
   {
     "author": "Crane333",
     "country": "Denmark",
-    "classId": "HERO_01",
+    "playerClass": "Warrior",
     "deckList": [
       "EX1_607",
       "OG_314",
@@ -397,7 +397,7 @@
   {
     "author": "Georgec",
     "country": "United Kingdom",
-    "classId": "HERO_08",
+    "playerClass": "Mage",
     "deckList": [
       "CS2_031",
       "CS2_024",
@@ -421,7 +421,7 @@
   {
     "author": "Georgec",
     "country": "United Kingdom",
-    "classId": "HERO_04",
+    "playerClass": "Paladin",
     "deckList": [
       "OG_198",
       "EX1_360",
@@ -445,7 +445,7 @@
   {
     "author": "Jako1910",
     "country": "Japan",
-    "classId": "HERO_06",
+    "playerClass": "Druid",
     "deckList": [
       "EX1_169",
       "AT_037",
@@ -470,7 +470,7 @@
   {
     "author": "Pinpingho",
     "country": "Taiwan",
-    "classId": "HERO_05",
+    "playerClass": "Hunter",
     "deckList": [
       "DS1_184",
       "OG_179",
@@ -495,7 +495,7 @@
   {
     "author": "KillerHero",
     "country": "Taiwan",
-    "classId": "HERO_08",
+    "playerClass": "Mage",
     "deckList": [
       "AT_004",
       "EX1_277",
@@ -522,7 +522,7 @@
   {
     "author": "Hotform",
     "country": "Canada",
-    "classId": "HERO_04",
+    "playerClass": "Paladin",
     "deckList": [
       "OG_221",
       "EX1_362",
@@ -544,7 +544,7 @@
   {
     "author": "Jambre",
     "country": "United Kingdom",
-    "classId": "HERO_04",
+    "playerClass": "Paladin",
     "deckList": [
       "AT_073",
       "EX1_130",
@@ -569,7 +569,7 @@
   {
     "author": "Zetalot",
     "country": "United Stats",
-    "classId": "HERO_09",
+    "playerClass": "Priest",
     "deckList": [
       "EX1_621",
       "AT_055",
@@ -594,7 +594,7 @@
   {
     "author": "heisnotaxel",
     "country": "Singapore",
-    "classId": "HERO_09",
+    "playerClass": "Priest",
     "deckList": [
       "EX1_621",
       "AT_055",
@@ -620,7 +620,7 @@
   {
     "author": "Kibler",
     "country": "United States",
-    "classId": "HERO_09",
+    "playerClass": "Priest",
     "deckList": [
       "OG_101",
       "CS2_004",
@@ -645,7 +645,7 @@
   {
     "author": "Foot",
     "country": "Korea",
-    "classId": "HERO_03",
+    "playerClass": "Rogue",
     "deckList": [
       "CS2_072",
       "EX1_145",
@@ -669,7 +669,7 @@
   {
     "author": "Amaz",
     "country": "Canada",
-    "classId": "HERO_03",
+    "playerClass": "Rogue",
     "deckList": [
       "CS2_072",
       "EX1_145",
@@ -706,7 +706,7 @@
   {
     "author": "Purple",
     "country": "Canada",
-    "classId": "HERO_02",
+    "playerClass": "Shaman",
     "deckList": [
       "EX1_238",
       "CS2_038",
@@ -731,7 +731,7 @@
   {
     "author": "Pinpingho",
     "country": "Taiwan",
-    "classId": "HERO_02",
+    "playerClass": "Shaman",
     "deckList": [
       "CS2_045",
       "LOE_018",
@@ -757,7 +757,7 @@
   {
     "author": "EdwardElric",
     "country": "China",
-    "classId": "HERO_01",
+    "playerClass": "Warrior",
     "deckList": [
       "OG_314",
       "CS2_108",
